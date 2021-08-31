@@ -1,10 +1,15 @@
 #include <Arduino.h>
 #include <HardwareSerial.h>
+#include <Print.h>
+#include <Stream.h>
 
 char leitura = 0;
 
-void ledSetup(int first, int second, int third);
-
+void ledSetup(int first, int second, int third) {
+  first == 1 ? digitalWrite(13, HIGH) : digitalWrite(13, LOW);
+  second == 1 ? digitalWrite(12, HIGH) : digitalWrite(12, LOW);
+  third == 1 ? digitalWrite(11, HIGH) : digitalWrite(11, LOW);
+}
 void setup() {
   pinMode(13, OUTPUT);
   pinMode(12, OUTPUT);
@@ -30,10 +35,4 @@ void loop() {
       ledSetup(0, 0, 0);
     }
   }
-}
-
-void ledSetup(int first, int second, int third) {
-  first == 1 ? digitalWrite(13, HIGH) : digitalWrite(13, LOW);
-  second == 1 ? digitalWrite(12, HIGH) : digitalWrite(12, LOW);
-  third == 1 ? digitalWrite(11, HIGH) : digitalWrite(11, LOW);
 }

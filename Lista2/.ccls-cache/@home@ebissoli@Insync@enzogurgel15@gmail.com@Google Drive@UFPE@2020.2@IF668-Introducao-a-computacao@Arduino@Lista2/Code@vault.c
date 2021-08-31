@@ -1,3 +1,6 @@
+#include "SoftwareSerial.h"
+         "
+#include "Stream.h"
 #include <Arduino.h>
 #include <HardwareSerial.h>
 

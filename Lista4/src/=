@@ -1,0 +1,80 @@
+#include "Arduino.h"
+
+typedef struct {
+  byte A;
+  byte B;
+  byte C;
+  byte D;
+  byte E;
+  byte F;
+  byte G;
+} matrizDigitos;
+
+void numExibe(matrizDigitos *mat);
+void updateMatriz(matrizDigitos *mat, matrizDigitos upd);
+static matrizDigitos *matriz = {.A=0, .B=0, .C=0, .D=0, .E=0, .F=0, .G=0};
+
+void setup() {
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(4, INPUT);
+  pinMode(2, INPUT);
+}
+
+void loop() {
+  if (digitalRead(4))
+    numExibe(matriz);
+  ;
+}
+
+void updateMatriz(matrizDigitos *mat, matrizDigitos upd) {
+  (*mat).A = upd.A;
+  (*mat).B = upd.B;
+  (*mat).C = upd.C;
+  (*mat).D = upd.D;
+  (*mat).E = upd.E;
+  (*mat).F = upd.F;
+  (*mat).G = upd.G;
+}
+void numExibe(matrizDigitos *mat) {
+  matrizDigitos upd;
+  int somaMat = (*mat).A * 1 + (*mat).B * 2 + (*mat).C * 3 + (*mat).D * 4 +
+                (*mat).E * 5 + (*mat).F * 6 + (*mat).G * 7;
+  switch (somaMat) { // 5 -> 1, 18 -> 2 e assim por diante
+  case 5:
+    updateMatriz(mat, upd = {1, 1, 0, 1, 0, 0, 1});
+    break;
+  case 18:
+    updateMatriz(mat, upd = {1, 1, 1, 1, 0, 0, 1});
+    break;
+  case 16:
+    updateMatriz(mat, upd = {0, 1, 1, 0, 0, 1, 1});
+    break;
+  case 15:
+    updateMatriz(mat, upd = {1, 1, 1, 1, 0, 1, 1});
+    break;
+  case 21:
+    updateMatriz(mat, upd = {0, 0, 1, 1, 1, 1, 1});
+    break;
+  case 26:
+    updateMatriz(mat, upd = {1, 1, 1, 0, 0, 0, 0});
+    break;
+  case 12:
+    updateMatriz(mat, upd = {1, 1, 1, 1, 1, 1, 1});
+    break;
+  case 35:
+    updateMatriz(mat, upd = {1, 1, 1, 0, 0, 1, 1});
+    break;
+  case 19:
+    updateMatriz(mat, upd = {0, 0, 0, 0, 0, 0, 0});
+    break;
+  default:
+    updateMatriz(mat, upd = {0, 1, 1, 0, 0, 0, 0});
+    break;
+  }
+}
